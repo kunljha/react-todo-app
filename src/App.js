@@ -1,7 +1,9 @@
+import Header from './components/Header'
+
 function App() {
 	return (
-		<div className='App'>
-			<h3>Hello from React</h3>
+		<div className='container'>
+			<Header title='Todo List' />
 		</div>
 	)
 }
