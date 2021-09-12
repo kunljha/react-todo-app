@@ -1,9 +1,18 @@
-import Button from './Button'
-const Task = ({ task, deleteTask }) => {
+import { FaTimes } from 'react-icons/fa'
+
+const Task = ({ task, deleteTask, toggleReminder }) => {
 	return (
-		<div className='task'>
-			<h3>{task.text}</h3>
-			<button onClick={() => deleteTask(task.id)}>x</button>
+		<div
+			className={`task ${task.reminder ? 'reminder' : ''}`}
+			onDoubleClick={() => toggleReminder(task.id)}
+		>
+			<h3>
+				{task.text}{' '}
+				<FaTimes
+					onClick={() => deleteTask(task.id)}
+					style={{ color: 'red', cursor: 'pointer' }}
+				/>
+			</h3>
 			<p>{task.day}</p>
 		</div>
 	)
