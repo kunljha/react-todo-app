@@ -4,26 +4,35 @@ import Tasks from './components/Tasks'
 import AddTask from './components/AddTask'
 
 function App() {
+	const [showTaskForm, setShowTaskForm] = useState(false)
 	const [tasks, setTasks] = useState([
 		{
 			id: 1,
 			text: 'task-1',
-			day: 'Sept 11, 2021',
+			date: 'Sept 11, 2021',
 			reminder: false,
 		},
 		{
 			id: 2,
 			text: 'task-2',
-			day: 'Sept 12, 2021',
+			date: 'Sept 12, 2021',
 			reminder: true,
 		},
 		{
 			id: 3,
 			text: 'task-3',
-			day: 'Sept 10, 2021',
+			date: 'Sept 10, 2021',
 			reminder: false,
 		},
 	])
+
+	// Add Task
+	const addTask = (task) => {
+		const id = Math.floor(Math.random() * 1000) + 1
+
+		const newTask = { id, ...task }
+		setTasks([...tasks, newTask])
+	}
 
 	// deleting tasks
 	const deleteTask = (id) => {
@@ -45,8 +54,14 @@ function App() {
 
 	return (
 		<div className='container'>
-			<Header title='Todo List' />
-			<AddTask />
+			<Header
+				title='Todo List'
+				onAddForm={() => {
+					setShowTaskForm(!showTaskForm)
+				}}
+				addButton={showTaskForm}
+			/>
+			{showTaskForm ? <AddTask addTask={addTask} /> : ''}
 			{tasks.length > 0 ? (
 				<Tasks
 					tasks={tasks}

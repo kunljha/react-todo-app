@@ -1,12 +1,24 @@
 import { useState } from 'react'
 
-const AddTask = () => {
+const AddTask = ({ addTask }) => {
 	const [text, setText] = useState('')
-	const [day, setDay] = useState('')
+	const [date, setDate] = useState('')
 	const [reminder, setReminder] = useState(false)
+	const [isChecked, setIsChecked] = useState(false)
+
+	const onSubmit = (e) => {
+		e.preventDefault()
+
+		addTask({ text, date, reminder })
+
+		setText('')
+		setDate('')
+		setReminder(false)
+		setIsChecked(false)
+	}
 
 	return (
-		<form className='add-form'>
+		<form className='add-form' onSubmit={onSubmit}>
 			<div className='form-control'>
 				<label htmlFor='task'>Task</label>
 				<input
@@ -16,16 +28,17 @@ const AddTask = () => {
 					onChange={(e) => {
 						setText(e.target.value)
 					}}
+					required
 				/>
 			</div>
 			<div className='form-control'>
-				<label htmlFor='day'>Add Day</label>
+				<label htmlFor='date'>Add Date</label>
 				<input
 					type='text'
-					placeholder='Add Day'
-					value={day}
+					placeholder='Add Date'
+					value={date}
 					onChange={(e) => {
-						setDay(e.target.value)
+						setDate(e.target.value)
 					}}
 				/>
 			</div>
@@ -34,8 +47,10 @@ const AddTask = () => {
 				<input
 					type='checkbox'
 					value={reminder}
+					checked={isChecked}
 					onChange={(e) => {
-						setReminder(e.target.currentTarget.checked)
+						setReminder(e.currentTarget.checked)
+						setIsChecked(e.currentTarget.checked)
 					}}
 				/>
 			</div>
