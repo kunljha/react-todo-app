@@ -12,7 +12,7 @@ function App() {
 
 	// fetch tasks from server
 	const fetchTasks = async () => {
-		const res = await fetch('http://localhost:5000/tasks')
+		const res = await fetch('/tasks')
 		const data = await res.json()
 		return data
 	}
@@ -28,7 +28,7 @@ function App() {
 
 	// Add Task
 	const addTask = async (task) => {
-		const res = await fetch('http://localhost:5000/tasks', {
+		const res = await fetch('/tasks', {
 			method: 'POST',
 			body: JSON.stringify(task),
 			headers: { 'Content-Type': 'application/json' },
@@ -46,7 +46,7 @@ function App() {
 
 	// deleting tasks
 	const deleteTask = async (id) => {
-		await fetch(`http://localhost:5000/tasks/${id}`, {
+		await fetch(`/tasks/${id}`, {
 			method: 'DELETE',
 		})
 
@@ -59,7 +59,7 @@ function App() {
 
 	// fetch a task
 	const fetchTask = async (id) => {
-		const res = await fetch(`http://localhost:5000/tasks/${id}`)
+		const res = await fetch(`/tasks/${id}`)
 		const data = await res.json()
 
 		return data
@@ -70,13 +70,13 @@ function App() {
 		const taskToToggle = await fetchTask(id)
 		const updatedTask = { ...taskToToggle, reminder: !taskToToggle.reminder }
 
-		const res = await fetch(`http://localhost:5000/tasks/${id}`, {
+		const res = await fetch(`/tasks/${id}`, {
 			method: 'PUT',
 			body: JSON.stringify(updatedTask),
 			headers: { 'Content-Type': 'application/json' },
 		})
 
-		const data = await res.json()
+		const data = await res.json() // data is updated task here
 
 		setTasks(
 			tasks.map((task) => {
@@ -96,12 +96,12 @@ function App() {
 					addButton={showTaskForm}
 				/>
 				<Route
-					path='/'
 					exact
+					path='/'
 					render={(props) => {
 						return (
 							<>
-								{showTaskForm ? <AddTask addTask={addTask} /> : ''}
+								{showTaskForm && <AddTask addTask={addTask} />}
 								{tasks.length > 0 ? (
 									<Tasks
 										tasks={tasks}
@@ -115,7 +115,7 @@ function App() {
 						)
 					}}
 				/>
-				<Route path='/about' component={About} />
+				<Route exact path='/about' component={About} />
 				<Footer />
 			</div>
 		</Router>

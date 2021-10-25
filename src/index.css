@@ -7,17 +7,19 @@
 }
 
 body {
+	background-color: #eeece7f1;
 	font-family: 'Poppins', sans-serif;
 }
 
 .container {
-	max-width: 500px;
-	margin: 30px auto;
-	overflow: auto;
+	max-width: 600px;
 	min-height: 300px;
-	border: 1px solid steelblue;
+	margin: 40px auto;
 	padding: 30px;
+	overflow: auto;
+	border: 3px solid steelblue;
 	border-radius: 5px;
+	background-color: #ece6e6;
 }
 
 .header {
@@ -29,7 +31,7 @@ body {
 
 .btn {
 	display: inline-block;
-	background: #000;
+	background: #1a759f;
 	color: #fff;
 	border: none;
 	padding: 10px 20px;
@@ -56,7 +58,9 @@ body {
 
 .task {
 	background: #f4f4f4;
-	margin: 5px;
+	border-radius: 4px;
+	border: 3px solid #457b9d;
+	margin: 7px;
 	padding: 10px 20px;
 	cursor: pointer;
 }

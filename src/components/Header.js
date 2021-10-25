@@ -8,14 +8,12 @@ const Header = ({ title, onAddForm, addButton }) => {
 	return (
 		<header className='header'>
 			<h1>{title}</h1>
-			{location.pathname === '/' ? (
+			{location.pathname === '/' && (
 				<Button
 					color={addButton ? 'red' : 'green'}
 					text={addButton ? 'Close' : 'Add'}
 					onClick={onAddForm}
 				/>
-			) : (
-				''
 			)}
 		</header>
 	)
